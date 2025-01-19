@@ -19,7 +19,7 @@ spring:
     redis:
       port: ${REDIS_PORT}
       host: ${REDIS_HOST}
-      pssword: ${REDIS_PASSWORD}
+      password: ${REDIS_PASSWORD}
       lettuce:
         pool:
           max-active: 8
