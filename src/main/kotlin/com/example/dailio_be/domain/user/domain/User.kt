@@ -3,19 +3,22 @@ package com.example.dailio_be.domain.user.domain
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import org.hibernate.annotations.JdbcTypeCode
+import org.hibernate.type.SqlTypes
+import java.util.UUID
 
 @Entity
 class User(
-        id: Long?,
         accountId: String,
         password: String,
         email: String
 ) {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = id
+    @GeneratedValue
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    @Column(nullable = false, updatable = false, unique = true)
+    val id: UUID = UUID.randomUUID()
 
     @Column(nullable = false, unique = true)
     var accountId: String = accountId
