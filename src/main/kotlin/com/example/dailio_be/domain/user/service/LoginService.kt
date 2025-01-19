@@ -1,6 +1,5 @@
 package com.example.dailio_be.domain.user.service
 
-import com.example.dailio_be.domain.user.exception.PasswordMismatchedException
 import com.example.dailio_be.domain.user.facade.UserFacade
 import com.example.dailio_be.domain.user.presentation.dto.request.LoginRequest
 import com.example.dailio_be.domain.user.presentation.dto.response.TokenResponse
@@ -19,7 +18,7 @@ class LoginService (
     fun execute(request: LoginRequest): TokenResponse {
         val user = userFacade.getByAccountId(request.accountId)
         if (!passwordEncoder.matches(request.password, user.password)) {
-            throw PasswordMismatchedException
+            throw RuntimeException("비밀번호가 일치하지 않습니다.")
         }
         return jwtTokenProvider.getToken(user.accountId)
     }
